@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymelef/layout"
+layout:decorate="~{layout}">
+
+<section layout:fragment="title">
+    Categories Page
+</section>
+
+<section layout:fragment="header">
+    List of Categories
+</section>
+<section layout:fragment="containt">
+    <a href="/categories/0">Create New Category</a>
+    <br/><br/>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Category ID</th>
+                <th>Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="category : ${listCategories}">
+                <td th:text="${category.id}">Category ID</td>
+                <td th:text="${category.name}">Name</td>
+                <td>
+                    <a th:href="@{categories/{id}(id=${category.id})}">Edit</a>
+                    &nbsp;&nbsp;&nbsp;
+                    <a th:href="@{categories/delete/{id}(id=${category.id})}">Delete</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div> 
+<div align="center">
+    <a href="/categories/excel">Export to excel</a>  
+    </div>
+</section>
+<section layout:fragment="footer">
+xvxcgbxdfgdx
+</section>
+</html>

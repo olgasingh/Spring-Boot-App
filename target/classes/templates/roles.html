@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymelef/layout"
+layout:decorate="~{layout}">
+
+<section layout:fragment="title">
+    Roles Page
+</section>
+<section layout:fragment="header">
+     Edit Roles
+</section>
+
+<section layout:fragment="containt">
+    <a href="/roles/0">Create New Role</a>
+    <br/><br/>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Role ID</th>
+                <th>Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="role : ${listRoles}">
+                <td th:text="${role.id}">Role ID</td>
+                <td th:text="${role.name}">Name</td>
+                <td>
+                    <a th:href="@{roles/{id}(id=${role.id})}">Edit</a>
+                    &nbsp;&nbsp;&nbsp;
+                    <a th:href="@{roles/delete/{id}(id=${role.id})}">Delete</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div> 
+<!--<div align="center">
+    <a href="/roles/excel">Export to excel</a>  
+    </div>-->
+</body>
+</html>

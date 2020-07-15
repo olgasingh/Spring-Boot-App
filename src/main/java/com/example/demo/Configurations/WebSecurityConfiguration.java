@@ -12,7 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
     public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
        @Override
        protected void configure(HttpSecurity http) throws Exception {
-          /*http
+          http
              .authorizeRequests()
                 .antMatchers("/", "/home").permitAll()
                 .antMatchers("/coaches","/coaches/*", "/games","/games/*").hasRole("Admins")
@@ -24,7 +24,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
                 .permitAll()
                 .and()
                 .logout()
-                .permitAll();*/
+                .permitAll();
        }
        @Autowired
        public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {

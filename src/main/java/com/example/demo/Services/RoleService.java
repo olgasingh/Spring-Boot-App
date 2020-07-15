@@ -21,8 +21,8 @@ public class RoleService {
         return repo.findAll();
     }
      
-    public void save(Role role) {
-        repo.save(role);
+    public Role save(Role role) {
+        return repo.save(role);
     }
      
     public Role get(long id) {

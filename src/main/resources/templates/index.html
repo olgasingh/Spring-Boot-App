@@ -1,12 +1,17 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Getting Started: Serving Web Content</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-</head>
-<body>dsfsd
-    <p th:text="'Hi, ' + ${name} + '!'" />
-    111
-    kkkkk
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymelef/layout"
+layout:decorate="~{layout}">
+
+<section layout:fragment="title">
+    Home Page
+</section>
+<section layout:fragment="header">
+    Welcome 
+</section>
+
+<section layout:fragment="containt">
+       
+    Welcome Page
 </body>
+
 </html>

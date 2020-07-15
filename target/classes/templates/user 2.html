@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymelef/layout"
+layout:decorate="~{layout}">
+
+<section layout:fragment="title">
+    User Page
+</section>
+<section layout:fragment="header">
+     Edit User
+</section>
+
+<section layout:fragment="containt">
+            <form action="#" th:action="@{/users/save}" th:object="${user}" method="post">
+             
+                        <table border="0" cellpadding="10">
+                                <tr>             
+                                        <td>User ID:</td>
+                                        <td>
+                                                <input type="text" th:field="*{id}" readonly="readonly" />
+                                            </td>
+                                    </tr>        
+                                <tr>             
+                                        <td>First Name:</td>
+                                        <td>
+                                                <input type="text" th:field="*{firstname}" />
+                                            </td>
+                                    </tr>
+                                <tr>
+                                        <td>Last Name</td>
+                                        <td><input type="text" th:field="*{lastname}" /></td>
+                                    </tr>
+                                <tr>
+                                        <td>DOB</td>
+                                        <td><input type="date" th:field="*{dob}" /></td>
+                                    </tr>
+                                <tr>
+                                        <td>Password</td>
+                                        <td><input type="text" th:field="*{password}" /></td>
+                                    </tr>  
+                     <tr>
+                                            <td>Email</td>
+                                            <td><input type="text" th:field="*{email}" /></td>
+                                        </tr>  
+                                    <tr>
+                                        <td>Rols</td>
+                                    
+                                    <td>
+                        
+                                            <input th:each="role : ${listRoles}" type="checkbox"  name="roles"
+                                            th:value="${role.id}" th:text="${role.name}" th:field="*{roles}">
+                                            </td>
+                                    </tr>                          
+                                <tr>
+                                        <td colspan="2"><button type="submit">Save</button> </td>
+                                    </tr>
+                            </table>
+                    </form>
+            
+        </section>
+
+
+</html>

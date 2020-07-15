@@ -15,8 +15,10 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
           http
              .authorizeRequests()
                 .antMatchers("/", "/home").permitAll()
-                //.antMatchers("/roles","/roles/*", "/users","/users/*").hasRole("Admins")
-                //.antMatchers("/categories","/categories/*", "/products","/products/*").hasRole("Users")
+                .antMatchers("/coaches","/coaches/*", "/games","/games/*").hasRole("Admins")
+                .antMatchers("/players","/players/*", "/teams","/teams/*").hasRole("Admins")
+                .antMatchers("/stats","/stats/*").hasRole("Admins")
+                .antMatchers("/statictics","/statictics/*").hasRole("Users")
                 .and()
              .formLogin()
                 .permitAll()

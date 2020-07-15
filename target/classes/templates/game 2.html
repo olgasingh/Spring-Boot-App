@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymelef/layout"
+layout:decorate="~{layout}">
+
+<section layout:fragment="title">
+    Game
+</section>
+<section layout:fragment="header">
+     Add/Edit Game
+</section>
+
+<section layout:fragment="containt">
+        <form action="#" th:action="@{/games/save}" th:object="${entity}" method="post">
+             
+                        <table border="0" cellpadding="10">
+                                <tr>             
+                                        <td>Game ID:</td>
+                                        <td>
+                                                <input type="text" th:field="*{id}" readonly="readonly" />
+                                            </td>
+                                    </tr>        
+                                <tr>             
+                                        <td>Game Name:</td>
+                                        <td>
+                                                <input type="text" th:field="*{name}"  required/>
+                                                <span th:if="${#fields.hasErrors('name')}"  th:errors="*{name}">!</span>
+                                            </td>
+                                    </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <table>
+                                            <thead>
+                                                <th>Player</th>
+                                                <th>Team</th>
+                                                <th>Coach</th>
+                                                <th>point</th>
+                                                <th>rebound</th>
+                                            </thead>
+                                            <tbody>
+                                            <tr th:each="stat, itemStat : *{stats}">
+                                                <td><input type="hidden" th:field="*{stats[__${itemStat.index}__].id}" />
+                                                    <input type="hidden" th:field="*{stats[__${itemStat.index}__].player.id}" />
+                                                    <span th:text="${stat.player.lastname +', ' +stat.player.firstname}" />
+                                                </td>
+                                                <td>
+                                                   team should display here
+                                    
+                                                </td>
+                                                <td>
+                                                    <select>
+                                                        <option th:each="coach : ${coaches}" th:value="${coach.id}"
+                                                            th:text="${coach.firstname}"></option>
+                                                    </select>
+                                                </td>
+                                                <td><input th:field="*{stats[__${itemStat.index}__].point}" /></td>
+                                                <td><input th:field="*{stats[__${itemStat.index}__].rebound}" /></td>
+                                            </tr>
+                                        </tbody>
+                                        </table>
+
+                                    </td>
+                                </tr>
+                                                            
+                                <tr>
+                                        <td colspan="2"><button type="submit">Save</button> </td>
+                                    </tr>
+                            </table>
+                    </form>
+            
+    </div>
+</body>
+
+</html>

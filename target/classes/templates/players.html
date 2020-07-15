@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymelef/layout"
+layout:decorate="~{layout}">
+
+<section layout:fragment="title">
+    Players
+</section>
+
+<section layout:fragment="header">
+    List of Players
+</section>
+<section layout:fragment="containt">
+    <a th:href="@{players/0}">Create Player</a>
+    <br/><br/>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Player ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>age</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="player : ${players}">
+                <td th:text="${player.id}">ID</td>
+                <td th:text="${player.firstname}">First Name</td>
+                <td th:text="${player.lastname}">Last Name</td>
+                <td th:text="${player.age}">age</td>
+                <td>
+                    <a th:href="@{players/{id}(id=${player.id})}">Edit</a>
+                    &nbsp;&nbsp;&nbsp;
+                    <a th:href="@{players/{id}/delete (id=${player.id})}">Delete</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>   
+</body>
+</html>

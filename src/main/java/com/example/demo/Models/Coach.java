@@ -19,7 +19,7 @@ public class Coach extends BaseModel {
     private String lastname;
     
  
-    private Team team;
+    private Team team = new Team();
     
     public String getFirstname(){
         return firstname;

@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 //@CrossOrigin(origins = "*", allowedHeaders = "*")
 
-@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
+//@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 @RequestMapping("/api/roles")
 public class MyRestController {
 
@@ -37,10 +37,11 @@ public class MyRestController {
         Role r = rs.save(role);
         return r;
     }
-    @CrossOrigin
+  //  @CrossOrigin
    // @DeleteMapping("/{id}")
 
-    @RequestMapping( path = "{id}", method = RequestMethod.DELETE)
+    //@RequestMapping( path = "{id}", method = RequestMethod.DELETE)
+    @DeleteMapping(value = "/{id}")
     public void deleteRole(@PathVariable("id") Long id){
         rs.delete(id);
     }

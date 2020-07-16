@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymelef/layout"
+layout:decorate="~{layout}">
+
+<section layout:fragment="title">
+    Statistics Page
+</section>
+<section layout:fragment="header">
+    Statistics
+</section>
+
+<section layout:fragment="containt">
+    <h1> Top 5  by points</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Player</th>
+                <th>Team</th>
+                <th>Points</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="tp : ${top5}">
+                <td th:text="${tp[0]}">player1</td>
+                <td th:text="${tp[2]}">Team Name</td>
+                
+                    <td th:text="${tp[1]}">Point</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h1> Bottom 5  by points</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Player</th>
+                <th>Team</th>
+                <th>Points</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="tp : ${bottom5}">
+                <td th:text="${tp[0]}">player1</td>
+                <td th:text="${tp[2]}">Team Name</td>
+                
+                    <td th:text="${tp[1]}">Point</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h1> Top 5  by Rebound</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Player</th>
+                <th>Team</th>
+                <th>Points</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="tp : ${top5rebound}">
+                <td th:text="${tp[0]}">player1</td>
+                <td th:text="${tp[2]}">Team Name</td>
+                
+                    <td th:text="${tp[1]}">Point</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h1> Bottom 5  by Rebound</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Player</th>
+                <th>Team</th>
+                <th>Points</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="tp : ${bottom5rebound}">
+                <td th:text="${tp[0]}">player1</td>
+                <td th:text="${tp[2]}">Team Name</td>
+                
+                    <td th:text="${tp[1]}">Point</td>
+            </tr>
+        </tbody>
+    </table>
+    
+
+</html>

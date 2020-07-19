@@ -4,9 +4,6 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
-import com.example.demo.Models.Game;
-import com.example.demo.Models.Stat;
-import com.example.demo.Repositories.GameRepository;
 import com.example.demo.Repositories.StatRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;

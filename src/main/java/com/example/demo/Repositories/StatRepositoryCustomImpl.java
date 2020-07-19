@@ -6,7 +6,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import com.example.demo.Models.Stat;
 
 public class StatRepositoryCustomImpl implements StatRepositoryCustom {
     @PersistenceContext

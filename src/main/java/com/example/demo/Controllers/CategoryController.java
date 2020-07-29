@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping(path = "/categories")
@@ -33,8 +34,13 @@ public class CategoryController {
     private CategoryService crsv;
 
     @RequestMapping(path = "")
-    public String getCategories(Model model) {
-        List<Category> listCategories = crsv.listAll();
+    public String getCategories(Model model,
+    @RequestParam(value="pageNo", defaultValue="0") Integer pageNo,
+    @RequestParam(value="pageSize", defaultValue="10") Integer pageSize,
+    @RequestParam(value="orderBy", defaultValue="name") String orderBy,
+    @RequestParam(value="orderDirection", defaultValue="ASC") String orderDirection
+    ) {
+        List<Category> listCategories = crsv.listAll(pageNo,pageSize,orderBy,orderDirection);
         model.addAttribute("listCategories", listCategories);
         return "categories";
     }

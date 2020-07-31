@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class ProductController {
@@ -28,8 +29,12 @@ public class ProductController {
     private CategoryService ctsv;
     
     @RequestMapping(path="/products")
-    public String getProducts(Model model){
-        List<Product> listProducts = prsv.listAll();
+    public String getProducts(Model model,
+    @RequestParam(value="pageNo", defaultValue="0") Integer pageNo,
+    @RequestParam(value="pageSize", defaultValue="10") Integer pageSize,
+    @RequestParam(value="orderBy", defaultValue="name") String orderBy,
+    @RequestParam(value="orderDirection", defaultValue="ASC") String orderDirection){
+        List<Product> listProducts = prsv.listAll(pageNo,pageSize,orderBy,orderDirection);
     model.addAttribute("listProducts", listProducts);
         return "products";
     }

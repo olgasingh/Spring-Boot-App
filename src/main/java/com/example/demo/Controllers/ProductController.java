@@ -34,7 +34,8 @@ public class ProductController {
     @RequestParam(value="pageSize", defaultValue="10") Integer pageSize,
     @RequestParam(value="orderBy", defaultValue="name") String orderBy,
     @RequestParam(value="orderDirection", defaultValue="ASC") String orderDirection){
-        List<Product> listProducts = prsv.listAll(pageNo,pageSize,orderBy,orderDirection);
+        //List<Product> listProducts = prsv.listAll(pageNo,pageSize,orderBy,orderDirection);
+        List<Product> listProducts = prsv.findByCriteria("cc");
     model.addAttribute("listProducts", listProducts);
         return "products";
     }

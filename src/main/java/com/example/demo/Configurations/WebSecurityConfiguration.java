@@ -7,10 +7,12 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.util.matcher.RegexRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
@@ -20,25 +22,42 @@ import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
 
 @Configuration
     @EnableWebSecurity
+    @Order(1)
     public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
        @Override
-       protected void configure(HttpSecurity http) throws Exception {          
+       protected void configure(HttpSecurity http) throws Exception {   
+                  
           http
-          //.csrf().ignoringAntMatchers("/nocsrf","/ignore/startswith/**")//security 4
+          .antMatcher("/**")
+                .authorizeRequests()
+                .antMatchers("/oauth/authorize**", "/login**", "/error**")
+                .permitAll()
+            .and()
+                .authorizeRequests()
+                .anyRequest().authenticated()
+            .and()
+                .formLogin().permitAll();
+          /*//.csrf().ignoringAntMatchers("/nocsrf","/ignore/startswith/**")//security 4
           //.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
           .csrf().disable()
           .authorizeRequests()
+               .antMatchers("/oauth/token").permitAll() //oauth request
+                .antMatchers("/api/**").authenticated() //api request
+                .antMatchers("/oauth/authorize**", "/login**", "/error**")
+                .permitAll()
                 .antMatchers("/", "/home").permitAll()
                 .antMatchers("/coaches","/coaches/*", "/games","/games/*").hasRole("Admins")
-                .antMatchers("/players","/players/*", "/teams","/teams/*").hasRole("Admins")
+                .antMatchers("/players","/players/**", "/teams","/teams/**").hasRole("Admins")
                 .antMatchers("/stats","/stats/*").hasRole("Admins")
                 .antMatchers("/statictics","/statictics/*").hasRole("Users")
+                .and()
+                .authorizeRequests().anyRequest().authenticated()
                 .and()
              .formLogin()
                 .permitAll()
                 .and()
                 .logout()
-                .permitAll();
+                .permitAll();*/
 
                 //http.csrf().requireCsrfProtectionMatcher(new RequestMatcher() {
                  // private Pattern allowedMethods = Pattern.compile("^(GET|HEAD|TRACE|OPTIONS)$");
@@ -64,11 +83,18 @@ import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
        public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
           auth
              .inMemoryAuthentication()
-             .withUser("admin").password("{noop}password").roles("Admins");
+             //.withUser("admin").password("{noop}password").roles("Admins");
+             .withUser("admin").password(passwordEncoder().encode("password")).roles("Admins");
              auth
              .inMemoryAuthentication()  
-             .withUser("user").password("{noop}password").roles("Users");
+             //.withUser("user").password("{noop}password").roles("Users");
+             .withUser("user").password(passwordEncoder().encode("password")).roles("Users");
        }
+
+       @Bean
+        public BCryptPasswordEncoder passwordEncoder(){ 
+            return new BCryptPasswordEncoder(); 
+        }
 
        @Bean
        CorsConfigurationSource corsConfigurationSource() {

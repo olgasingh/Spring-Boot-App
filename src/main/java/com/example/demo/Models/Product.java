@@ -1,5 +1,7 @@
 package com.example.demo.Models;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -8,8 +10,13 @@ import javax.validation.constraints.NotEmpty;
 
  
 @Entity
-public class Product extends GeneralBaseModel {
+public class Product extends GeneralBaseModel implements Serializable {
     
+    /**
+     *
+     */
+    private static final long serialVersionUID = -2179975668024949664L;
+
     @NotEmpty(message = "Brand may not be empty")
     private String brand;
 

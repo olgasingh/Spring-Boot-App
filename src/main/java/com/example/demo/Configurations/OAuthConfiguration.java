@@ -34,7 +34,7 @@ public class OAuthConfiguration extends AuthorizationServerConfigurerAdapter {
             .scopes("read_profile_info")
             .resourceIds("oauth2-resource")
             .redirectUris("http://localhost:8081/login")
-            .accessTokenValiditySeconds(120)
+            .accessTokenValiditySeconds(1200)
             .refreshTokenValiditySeconds(240000);
     }
 }

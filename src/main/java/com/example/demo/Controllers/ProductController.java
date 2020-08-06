@@ -6,6 +6,8 @@ import javax.validation.Valid;
 
 import com.example.demo.Models.Category;
 import com.example.demo.Models.Product;
+import com.example.demo.Models.containers.ListContainer;
+import com.example.demo.Models.containers.ListItem;
 import com.example.demo.Services.CategoryService;
 import com.example.demo.Services.ProductService;
 
@@ -28,7 +30,7 @@ public class ProductController {
     @Autowired
     private CategoryService ctsv;
     
-    @RequestMapping(path="/products")
+    /*@RequestMapping(path="/products")
     public String getProducts(Model model,
     @RequestParam(value="pageNo", defaultValue="0") Integer pageNo,
     @RequestParam(value="pageSize", defaultValue="10") Integer pageSize,
@@ -37,6 +39,20 @@ public class ProductController {
         //List<Product> listProducts = prsv.listAll(pageNo,pageSize,orderBy,orderDirection);
         List<Product> listProducts = prsv.findByCriteria("cc");
     model.addAttribute("listProducts", listProducts);
+        return "products";
+    }*/
+    @RequestMapping(path="/products")
+    public String getProducts(Model model, @ModelAttribute ListContainer listContainer){
+        //List<Product> listProducts = prsv.listAll(pageNo,pageSize,orderBy,orderDirection);
+        /*ListItem li = new ListItem();
+        li.setFieldName("category.name");
+        li.setFieldValue("c");
+        listContainer.getSearchItems().add( li);*/
+        Long totalPages=0L;
+        List<Product> listProducts = prsv.findByCriteria(listContainer, totalPages);
+        model.addAttribute("listProducts", listProducts);
+        model.addAttribute("listContainer", listContainer);
+        model.addAttribute("totalPages", totalPages);
         return "products";
     }
 

@@ -12,6 +12,7 @@ layout:decorate="~{layout}">
 <section layout:fragment="containt">
     <a href="/products/0">Create New Product</a>
     <br/><br/>
+    <form action="#" th:action="@{/products}" th:object="${product}" method="post">
     <table class="table table-striped">
         <thead>
             <tr>
@@ -22,6 +23,15 @@ layout:decorate="~{layout}">
                 <th>Price</th>
                 <th>Category</th>
                 <th>Actions</th>
+            </tr>
+            <tr>
+                <th><input type="text" name="id" /></th>
+                <th><input type="text" name="name" /></th>
+                <th><input type="text" name="brand" /></th>
+                <th><input type="text" name="madein" /></th>
+                <th><input type="text" name="price" /></th>
+                <th><input type="text" name="category.name" /></th>
+                <th><input type="submit"  /></th>
             </tr>
         </thead>
         <tbody>
@@ -39,6 +49,18 @@ layout:decorate="~{layout}">
                 </td>
             </tr>
         </tbody>
+        <tfoot>
+            <tr>
+                <th>
+                    <select name="pageSize">
+                        <option>5</option>
+                        <option>10</option>
+                        <option>15</option>
+                        <option>20</option>
+                    </select>
+                </th>
+            </tr>
+        </tfoot>
     </table>
 </div>   
 </body>

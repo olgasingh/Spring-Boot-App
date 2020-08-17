@@ -2,6 +2,7 @@ package com.example.demo.Configurations;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configuration.ClientDetailsServiceConfiguration;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
@@ -21,7 +22,8 @@ public class OAuthConfiguration extends AuthorizationServerConfigurerAdapter {
         security
             .tokenKeyAccess("permitAll()")
             .checkTokenAccess("isAuthenticated()")
-            .allowFormAuthenticationForClients();
+            //.allowFormAuthenticationForClients()
+            ;
     }
  
     @Override
@@ -30,11 +32,13 @@ public class OAuthConfiguration extends AuthorizationServerConfigurerAdapter {
             .inMemory()
             .withClient("clientapp").secret(passwordEncoder.encode("123456"))
             .authorizedGrantTypes("password", "authorization_code", "refresh_token")
-            .authorities("READ_ONLY_CLIENT")
-            .scopes("read_profile_info")
+            .scopes("read_profile_info")            
             .resourceIds("oauth2-resource")
             .redirectUris("http://localhost:8081/login")
             .accessTokenValiditySeconds(1200)
-            .refreshTokenValiditySeconds(240000);
+            .refreshTokenValiditySeconds(240000)
+            .scopes("read","write")
+            .autoApprove(true)
+            ;
     }
 }
